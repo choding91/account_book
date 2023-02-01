@@ -26,13 +26,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name="email address",
-        max_length=255,
-        unique=True,
-    )
+    email = models.EmailField(verbose_name="이메일 주소", max_length=50, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     objects = UserManager()
 
