@@ -8,3 +8,12 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ["id", "account", "content"]
 
 
+class PostDetailSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+
+    def get_user(self, obj):
+        return obj.user.email
+
+    class Meta:
+        model = Post
+        fields = "__all__"
