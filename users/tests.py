@@ -25,3 +25,10 @@ class UserTest(APITestCase):
             data=self.data,
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_logout(self):
+        response = self.client.delete(
+            path=reverse("signup_view"),
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        self.assertEqual(response.status_code, 204)
