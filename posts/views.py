@@ -24,7 +24,7 @@ class PostView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# 게시글 상세 조회
+# 게시글 상세 조회 / 수정
 class PostDetailView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -32,3 +32,15 @@ class PostDetailView(APIView):
         post = get_object_or_404(Post, id=post_id)
         serializer = PostDetailSerializer(post)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
+        if request.user == post.user:
+            serializer = PostSerializer(post, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"message": "가계부를 수정할 권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
