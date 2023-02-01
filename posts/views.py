@@ -24,7 +24,7 @@ class PostView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# 게시글 상세 조회 / 수정
+# 게시글 상세 조회 / 수정 / 삭제
 class PostDetailView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
