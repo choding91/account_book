@@ -5,11 +5,19 @@ from posts.models import Post
 from posts.serializers import PostSerializer
 
 
-# 게시글 전체 조회
+# 게시글 전체 조회 / 등록
 class PostView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by("-pk")
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = PostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
