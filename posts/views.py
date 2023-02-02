@@ -24,7 +24,7 @@ class PostView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# 게시글 상세 조회 / 수정 / 삭제
+# 게시글 상세 조회 / 복사 / 수정 / 삭제
 class PostDetailView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -32,6 +32,16 @@ class PostDetailView(APIView):
         post = get_object_or_404(Post, id=post_id)
         serializer = PostDetailSerializer(post)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
+        post.id = None
+        serializer = PostDetailSerializer(post, data=post.__dict__)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
