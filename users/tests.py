@@ -11,6 +11,7 @@ class UserTest(APITestCase):
 
     def setUp(self):
         self.access_token = self.client.post(reverse("token_obtain_pair"), self.data).data["access"]
+        self.refresh_token = self.client.post(reverse("token_obtain_pair"), self.data).data["refresh"]
 
     def test_signup(self):
         response = self.client.post(
@@ -27,8 +28,8 @@ class UserTest(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_logout(self):
-        response = self.client.delete(
-            path=reverse("signup_view"),
-            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        response = self.client.post(
+            path=reverse("token_blacklist"),
+            data={"refresh": self.refresh_token},
         )
-        self.assertEqual(response.status_code, 204)
+        self.assertEqual(response.status_code, 200)
