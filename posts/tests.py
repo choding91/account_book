@@ -22,3 +22,11 @@ class PostTest(APITestCase):
             HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_create_post(self):
+        response = self.client.post(
+            path=reverse("post_view"),
+            data=self.post_data,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        self.assertEqual(response.status_code, 201)
