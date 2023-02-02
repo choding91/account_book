@@ -44,9 +44,16 @@ class PostDetailTest(APITestCase):
         self.access_token = self.client.post(reverse("token_obtain_pair"), self.user_data).data["access"]
         self.refresh_token = self.client.post(reverse("token_obtain_pair"), self.user_data).data["refresh"]
 
-    def test_get_post(self):
+    def test_get_post_detail(self):
         response = self.client.get(
             path=reverse("post_detail_view", kwargs={"post_id": self.post.id}),
             HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_duplicate_post_detail(self):
+        response = self.client.post(
+            path=reverse("post_detail_view", kwargs={"post_id": self.post.id}),
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        self.assertEqual(response.status_code, 201)
