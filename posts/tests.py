@@ -65,3 +65,10 @@ class PostDetailTest(APITestCase):
             HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
         )
         self.assertEqual(response.status_code, 202)
+
+    def test_delete_post_detail(self):
+        response = self.client.delete(
+            path=reverse("post_detail_view", kwargs={"post_id": self.post.id}),
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        self.assertEqual(response.status_code, 204)
