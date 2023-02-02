@@ -53,7 +53,7 @@ class PostDetailView(APIView):
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({"message": "가계부를 수정할 권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
+            return Response({"message": "가계부 수정 권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
@@ -61,4 +61,4 @@ class PostDetailView(APIView):
             post.delete()
             return Response({"message": "가계부가 삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response({"message": "가계부를 삭제할 권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
+            return Response({"message": "가계부 삭제 권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
