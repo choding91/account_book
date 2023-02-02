@@ -6,7 +6,7 @@ from posts.models import Post
 from posts.serializers import PostDetailSerializer, PostSerializer
 
 
-# 게시글 전체 조회 / 등록
+# 가계부 전체 조회 / 등록
 class PostView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -24,7 +24,7 @@ class PostView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# 게시글 상세 조회 / 복사 / 수정 / 삭제
+# 가계부 상세 조회 / 복사 / 수정 / 삭제
 class PostDetailView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
