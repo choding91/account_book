@@ -13,12 +13,19 @@ class UserTest(APITestCase):
         self.access_token = self.client.post(reverse("token_obtain_pair"), self.data).data["access"]
         self.refresh_token = self.client.post(reverse("token_obtain_pair"), self.data).data["refresh"]
 
-    def test_signup(self):
+    def test_register(self):
         response = self.client.post(
             path=reverse("signup_view"),
             data={"email": "email@email.com", "password": "1234"},
         )
         self.assertEqual(response.status_code, 201)
+
+    def test_unregister(self):
+        response = self.client.delete(
+            path=reverse("signup_view"),
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        self.assertEqual(response.status_code, 204)
 
     def test_login(self):
         response = self.client.post(
