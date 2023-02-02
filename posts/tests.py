@@ -57,3 +57,11 @@ class PostDetailTest(APITestCase):
             HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
         )
         self.assertEqual(response.status_code, 201)
+
+    def test_update_post_detail(self):
+        response = self.client.put(
+            path=reverse("post_detail_view", kwargs={"post_id": self.post.id}),
+            data=self.post_data,
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        self.assertEqual(response.status_code, 202)
