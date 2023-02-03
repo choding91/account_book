@@ -11,7 +11,8 @@ class PostView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        posts = Post.objects.all().order_by("-pk")
+        user = request.user
+        posts = user.post_user.all().order_by("-pk")
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -30,18 +31,24 @@ class PostDetailView(APIView):
 
     def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
-        serializer = PostDetailSerializer(post)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        if request.user == post.user:
+            serializer = PostDetailSerializer(post)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "가계부 상세 조회 권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
 
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         post.id = None
-        serializer = PostDetailSerializer(post, data=post.__dict__)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if request.user == post.user:
+            serializer = PostDetailSerializer(post, data=post.__dict__)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "가계부 복제 권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
 
     def put(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
