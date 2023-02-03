@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # .env
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
 SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = True
@@ -56,10 +57,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "account_book.wsgi.application"
 
+# SQLite3 DB
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+# MySQL DB
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "account_book",
+        "USER": env("USER"),
+        "PASSWORD": env("PASSWORD"),
+        "PORT": env("PORT"),
+        "HOST": env("HOST"),
     }
 }
 
