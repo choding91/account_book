@@ -68,7 +68,7 @@ https://www.notion.so/API-baa0a4820226466b87bdbfd2938dc451
 
 ### 유저 기능
 
-- 회원가입 : 이메일/비밀번호를 입력, 비밀번호 암호화 적용
+- 회원가입 : 이메일/비밀번호 입력, 비밀번호 암호화 적용
 - 회원탈퇴 : 유저 인증 여부 확인 및 서비스 이용 종료
 - 로그인 : Simple JWT/Token(Access, Refresh) 발급
 - 로그아웃 : Simple JWT/Blacklist 적용
