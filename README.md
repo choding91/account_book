@@ -90,9 +90,14 @@ https://www.notion.so/API-baa0a4820226466b87bdbfd2938dc451
 
 <details>
 <summary>🐛 가계부 복제 시 동일한 가계부에 덮어쓰기 되는 문제</summary>
+
+</br>
+
 <div>
 
-- 상황 : 가계부 복제 기능 확인 중 새로운 id값으로 등록되는 것이 아닌 기존 가계부에 같은 내용이 덮어쓰기 되는 문제 발생(수정 시간만 변경됨)
+- 상황 : 가계부 복제 기능 구현 중 기존 가계부에 같은 내용이 덮어쓰기 되는 문제 발생(수정 시간만 변경됨)
+
+![image](https://user-images.githubusercontent.com/113072964/216566037-5f7b4ab6-41bf-4090-ba9f-1778df1ce46a.png)
 
 - 해결 : 기존 id값으로 가계부를 받아온 뒤 id값만 None 처리하여 새로운 가계부로 인식 및 등록 가능
 
