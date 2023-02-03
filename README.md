@@ -16,7 +16,7 @@
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/Django_rest_framework-A50E15?style=for-the-badge&logo=Django&logoColor=white">&nbsp;
-<img src="https://img.shields.io/badge/MySQL-4169E1?style=for-the-badge&logo=MySQL&logoColor=white">
+<img src="https://img.shields.io/badge/MySQL-4169E1?style=for-the-badge&logo=MySQL&logoColor=white">&nbsp;
 
 </br>
 
@@ -25,7 +25,7 @@
 
 ### API
 
-https://www.notion.so/API-baa0a4820226466b87bdbfd2938dc451
+- [Notion](https://www.notion.so/API-baa0a4820226466b87bdbfd2938dc451)
 
 </br>
 
