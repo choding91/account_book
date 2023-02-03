@@ -31,7 +31,7 @@
 
 ### ERD
 
-![ERD](https://user-images.githubusercontent.com/113072964/216553064-4e28098d-cef9-4633-b588-5aed2406e660.jpg)
+![image](https://user-images.githubusercontent.com/113072964/216600371-e905c3e0-38ba-4a3c-b7a9-56e4a68d3a0a.png)
 
 </br>
 
