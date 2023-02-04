@@ -57,14 +57,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "account_book.wsgi.application"
 
-# SQLite3 DB
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 # MySQL DB
 DATABASES = {
     "default": {
@@ -106,15 +98,15 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [  # 기본적인 view 접근 권한 지정
+    "DEFAULT_PERMISSION_CLASSES": [  # 기본적인 view 접근 권한 설정
         "rest_framework.permissions.AllowAny",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [  # session 혹은 token을 인증할 클래스 설정
+    "DEFAULT_AUTHENTICATION_CLASSES": [  # token, session 인증 클래스 설정
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
-    "DEFAULT_PARSER_CLASSES": [  # request.data 속성에 액세스 할 때 사용되는 파서 지정
+    "DEFAULT_PARSER_CLASSES": [  # request.data 속성에 액세스할 때 사용되는 파서 설정
         "rest_framework.parsers.JSONParser",
         "rest_framework.parsers.FormParser",
         "rest_framework.parsers.MultiPartParser",

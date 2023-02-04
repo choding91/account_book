@@ -2,6 +2,7 @@ from django.urls import path
 from users.views import SignupView
 from rest_framework_simplejwt.views import TokenBlacklistView, TokenObtainPairView, TokenRefreshView
 
+
 urlpatterns = [
     path("signup/", SignupView.as_view(), name="signup_view"),
     # 로그인 - access, refresh 토큰 발급
